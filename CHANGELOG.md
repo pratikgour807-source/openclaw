@@ -14,6 +14,7 @@ Docs: https://docs.openclaw.ai
 
 - Agents/media: deliver failed async image, music, and video generation completions directly when requester-session completion handoff fails, so channel users see provider errors instead of silent fallback stalls.
 - Codex app-server: record native Codex tool calls and results into trajectory artifacts so debug/trajectory exports capture the full Codex-native tool history, not just OpenClaw-bridged turns. Thanks @vyctorbrzezowski.
+- Providers/Together: send video-generation requests to Together's v2 video API even when shared text-model config still points at the v1 base URL.
 - CLI/sessions: accept `openclaw sessions list` as an alias for `openclaw sessions`, matching other list-style commands. Fixes #81139. (#81163) Thanks @YB0y.
 - Channels/stream previews: widen compact progress draft lines and cut prose at word boundaries while preserving command/path suffixes, with `streaming.progress.maxLineChars` for channel-specific tuning.
 - CLI/plugins: have `openclaw plugins doctor` warn when a configured runtime needs a missing owner plugin, sharing the same install mapping as `openclaw doctor --fix`. Fixes #81326. (#81674) Thanks @Zavianx.
