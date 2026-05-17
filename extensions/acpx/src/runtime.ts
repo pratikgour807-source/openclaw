@@ -986,7 +986,13 @@ export class AcpxRuntime implements AcpRuntime {
     const command = await this.resolveCommandForHandle(input.handle);
     const delegate = await this.resolveDelegateForHandle(input.handle);
     try {
-      for await (const event of delegate.runTurn(input)) {
+      for await (const event of delegate.runTurn({
+        ...input,
+        // OpenClaw owns ACP turn deadlines. acpx treats timeout after partial
+        // agent output as a completed turn, which can mark background work done
+        // before the harness emits a real terminal event.
+        timeoutMs: 0,
+      })) {
         if (
           event.type !== "error" ||
           !isCodexAcpCommand(command) ||
